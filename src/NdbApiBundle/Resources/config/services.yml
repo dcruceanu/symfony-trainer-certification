@@ -1,0 +1,5 @@
+services:
+  food_manager_service:
+    class: NdbApiBundle\Service\FoodManagerService
+    arguments:
+      - "@food_manager_repo"

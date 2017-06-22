@@ -1,0 +1,16 @@
+services:
+  base_repo:
+    class: NdbApiBundle\Repository\BaseRepository
+    arguments:
+      - "%ndb_base_url%"
+      - "%ndb_api_key%"
+    abstract: true
+    parent: rest_repo
+
+  rest_repo:
+    class: NdbApiBundle\Repository\AbstractRestRepository
+    abstract: true
+
+  food_manager_repo:
+    class: NdbApiBundle\Repository\FoodManagerRepository
+    parent: base_repo

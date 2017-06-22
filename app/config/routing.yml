@@ -1,3 +1,7 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+ndb_api:
+    resource: "@NdbApiBundle/Controller/"
+    type:     annotation

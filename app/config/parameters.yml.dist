@@ -17,3 +17,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    ndb_base_url: https://api.nal.usda.gov/ndb
+    ndb_api_key: Yq9V4gjZLA9KcoxyB3AVNWhB5hAnbeONren0bJry
+
