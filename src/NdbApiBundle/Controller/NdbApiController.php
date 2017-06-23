@@ -7,10 +7,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class NdbApiController
+ *
+ * @package NdbApiBundle\Controller
+ * @author  Cruceanu Daniela <daniela.cruceanu@cegeka.com>
+ *
+ * @Route("/nbd_api_")
+ */
 class NdbApiController extends Controller
 {
     /**
-     *
      * @Route("/search", name="getFoodByName")
      * @param Request $request
      *
@@ -26,17 +33,20 @@ class NdbApiController extends Controller
         if(null !== $foodObjectDetails && null !== $foodObjectDetails->list
                 && null !== $foodObjectDetails->list->item[0]
                     && null !== $foodObjectDetails->list->item[0]->ndbno) {
-                        $idOfTheSearchedFood = $foodObjectDetails->list->item[0]->ndbno;
-                        $foodReport = json_decode($foodManagerService->getFoodReportByFoodId($idOfTheSearchedFood));
-                        $nutrients = $foodReport->report->food->nutrients;
+            $idOfTheSearchedFood = $foodObjectDetails->list->item[0]->ndbno;
+            $foodReport          = json_decode($foodManagerService->getFoodReportByFoodId($idOfTheSearchedFood));
+            $nutrients           = $foodReport->report->food->nutrients;
 
-            for($i = 0; $i < count($nutrients); $i++) {
+            for ($i = 0; $i < count($nutrients); $i++) {
                 $listOfNutrientsFor100GramsOfProduct = $listOfNutrientsFor100GramsOfProduct + [
-                        $nutrients[$i]->name => $nutrients[$i]->value . " ".$nutrients[$i]->unit
+                        $nutrients[$i]->name => $nutrients[$i]->value . " " . $nutrients[$i]->unit
                     ];
             }
         }
 
+        $this->get('logger')->addInfo("Retrieved food info for {$request->get('name')}");
+
         return new JsonResponse($listOfNutrientsFor100GramsOfProduct);
     }
+
 }

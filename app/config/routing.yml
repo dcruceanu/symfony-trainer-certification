@@ -5,3 +5,7 @@ app:
 ndb_api:
     resource: "@NdbApiBundle/Controller/"
     type:     annotation
+
+test_api:
+    resource: "@TestApiBundle/Controller/"
+    type:     annotation
