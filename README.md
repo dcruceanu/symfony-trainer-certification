@@ -1,11 +1,7 @@
-symfony-trainer-certification
+The bundles
 =============================
 
-A Symfony project that should help all the people who wants to take the exam of Symfony 3 certification.
-
-Exercises 
-
-I. The bundles
+A Symfony project with exercises that should help all the people who wants to take the exam of Symfony 3 certification.
 
 Code organization, Naming conventions (Best practices)
 =====================================================
