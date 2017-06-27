@@ -16,10 +16,10 @@ Code organization, Naming conventions (Best practices)
  4. Give an exemple where you can take the bundle alias.
     - It is used in DI/Configuration.php - is the alias for the DI. In this case, we don't need configurable parameters so we dont build a special structure.
     
-    ! If you need to put some config parameters and extract them in your code you should
-    build a service, and in the Extension class get its definition and put in a property of that service the
+    ! If you need to have some config parameters (from config.yml) in your code (controller, service etc) you should
+    build a service and in the Extension class get its definition and put in a property of that service the
     value of the needed parameter (More info here: https://stackoverflow.com/questions/4821692/how-do-i-read-configuration-settings-from-symfony2-config-yml)
-    This case is for the config parameters which need to be configurable (especially for the bundles who are using you bundle as a third party). If not, the parameter could be part of parameters.yml.
+    This case is for the config parameters which needs to be configurable (especially for the bundles who are using your bundle as a third party). If not, the parameter could be part of parameters.yml.
  5. Add some logs in your bundle and check them.
     - Used Monolog to print some info (I found the logs in var/logs/dev.log)
  6. Play with the routing and see what happens if you change the prefix.
@@ -29,7 +29,7 @@ Code organization, Naming conventions (Best practices)
  Bundle inheritance, Compiler pass
  =================================
  
- 7. Create a new bundle named TestApiBundle which extends the NdbBundle and override the controller and the service.
+ 7. Create a new bundle named TestApiBundle which extends the NdbApiBundle and override the controller and the service.
     - For the controller is enough to create a new class in the same path (after putting the bundle alias in the getParent method).
     - An extra thing which is not mentioned in the documentation is that we need routing specified for our controller (so also a change in routing.yml)
     - To not modify the current implementation, I just called the parent and did the same implementation (the idea was just to play with the bundle inheritance and see how it works.).
@@ -52,4 +52,22 @@ Code organization, Naming conventions (Best practices)
     From docs:
     2. If you also want to tweak the logic used by Symfony to generate error pages, override the default exception controller
     3. If you need total control of exception handling to execute your own logic use the kernel.exception event.  
+    
+ 9. Print information regarding the list of the bundles, cache dir, log dir (trough the kernel) etc in a page.   
+ 10. Describe the key parts of registering bundle and the role of the Kernel.
+     - In appKernel.php -> registerBundles(), the bundles is enabled
+     - The bundle should extend Bundle class which implements BundleInterface
+     - The kernel is the heart of the Symfony app. The Kernel class registers all the enabled bundles and sets the container in each one of them.
  
+ 
+Controllers
+================
+
+   1. Use at least 5 methods from Base Controller in a single action.
+   2. Add some cookies on the request and access them in other request.
+   3. Check all parameter bags and all the methods to access them.
+   4. Add a flash on the request in a controller action.
+   5. Make a redirest and an internal redirect.
+   6. Generate a 404 page.
+   7. Play with some internal controllers.
+   8. File upload?  
