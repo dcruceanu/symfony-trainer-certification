@@ -14,7 +14,10 @@
 
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+            <directory>src/*/*Bundle/Tests</directory>
+            <directory>src/*/*/*Bundle/Tests</directory>
+            <directory>src/*/Bundle/*Bundle/Tests</directory>
+            <directory>src/*Bundle/Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -23,8 +26,32 @@
             <directory>src</directory>
             <exclude>
                 <directory>src/*Bundle/Resources</directory>
+                <directory>src/*Bundle/Entity</directory>
+                <directory>src/*Bundle/Tests</directory>
+                <directory>src/*Bundle/DependencyInjection</directory>
+                <directory>src/*Bundle/DataFixtures</directory>
+                <directory>src/*Bundle/Enum</directory>
+
                 <directory>src/*/*Bundle/Resources</directory>
+                <directory>src/*/*Bundle/Entity</directory>
+                <directory>src/*/*Bundle/Tests</directory>
+                <directory>src/*/*Bundle/DependencyInjection</directory>
+                <directory>src/*/*Bundle/DataFixtures</directory>
+                <directory>src/*/*Bundle/Enum</directory>
+
+                <directory>src/*/*/*Bundle/Resources</directory>
+                <directory>src/*/*/*Bundle/Entity</directory>
+                <directory>src/*/*/*Bundle/Tests</directory>
+                <directory>src/*/*/*Bundle/DependencyInjection</directory>
+                <directory>src/*/*/*Bundle/DataFixtures</directory>
+                <directory>src/*/*/*Bundle/Enum</directory>
+
                 <directory>src/*/Bundle/*Bundle/Resources</directory>
+                <directory>src/*/Bundle/*Bundle/Entity</directory>
+                <directory>src/*/Bundle/*Bundle/Tests</directory>
+                <directory>src/*/Bundle/*Bundle/DependencyInjection</directory>
+                <directory>src/*/Bundle/*Bundle/DataFixtures</directory>
+                <directory>src/*/Bundle/*Bundle/Enum</directory>
             </exclude>
         </whitelist>
     </filter>

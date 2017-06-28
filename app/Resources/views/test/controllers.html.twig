@@ -1,0 +1,46 @@
+{%  extends 'test/base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <p> Query param </p>
+            <div>
+                {{ queryParams.get('default') }}
+            </div>
+
+            <p> Array query param </p>
+            <div>
+                {{ queryParams.get('arrayParam[value]') }}
+            </div>
+
+            <p> Post param </p>
+            <div>
+                {{ postParams.get('default') }}
+            </div>
+
+            <p> Content </p>
+
+            {% if requestContent is not empty %}
+                <div>
+                    {{ requestContent['default'] }}
+                </div>
+            {% else %}
+                <div>
+                    No request content provided
+                </div>
+            {% endif %}
+
+            <p> Headers </p>
+            <div>
+                {{ headers.get('Default-header') }}
+            </div>
+
+            {% if files is not empty %}
+                <p> File was provided. </p>
+            {% else %}
+                <p> No file provided. </p>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

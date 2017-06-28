@@ -63,11 +63,20 @@ Code organization, Naming conventions (Best practices)
 Controllers
 ================
 
-   1. Use at least 5 methods from Base Controller in a single action.
-   2. Add some cookies on the request and access them in other request.
-   3. Check all parameter bags and all the methods to access them.
-   4. Add a flash on the request in a controller action.
-   5. Make a redirest and an internal redirect.
+   Create in TestApiBundle a controller which is using most of the features offered by HttpFoundation component.
+   1. Use at least 5 methods from Base Controller.
+      I used: renderView, render, get, container, addFlash etc.
+   2. Access in the controller some parameters (GET, POST, atributes, files, headers) and print them in twig.
+      Provide multiple methods to get the parameters.
+      Check this behaviour using a functional test (using BrowserKit).
+   
+   !! If you need to pass a custom header through the request you need to put a header starting with HTTP_ if you want to access it through the  headers property of the Request object.
+   3. Add a cookie on a response and check it in the functional test.
+      Ctrl: $this->response->headers->addCookie(new Cookie('name', ''))
+      Test: $client->getCookieJar()->get('name')
+   4. Add a flash on the response in a controller action.
+      CTRL: $this->addFlash or $this->container->get('session')->getFlashBag()->add('name');
+   5. Make a redirect and an internal redirect.
    6. Generate a 404 page.
    7. Play with some internal controllers.
-   8. File upload?  
+   8. Check restrictions regarding the name of the controller.
