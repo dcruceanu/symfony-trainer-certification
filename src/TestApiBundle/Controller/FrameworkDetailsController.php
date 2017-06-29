@@ -5,6 +5,8 @@ namespace TestApiBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,8 +15,10 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @package TestApiBundle\Controller
  * @author  Cruceanu Daniela <daniela.cruceanu@cegeka.com>
+ *
+ * @Route("/framework")
  */
-class FrameworkDetailsController
+class FrameworkDetailsController extends Controller
 {
     /**
      * Retrieve some details of the app structure
@@ -106,13 +110,37 @@ class FrameworkDetailsController
     }
 
     /**
-     * @Route("/basic", name= "basicAction")
-     * @param Request $request
+     * @Route("/details_temp_redirect", name= "detailsTempRedirectAction")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function basicAction(Request $request)
+    public function detailsTempAction()
     {
-        return new Response();
+        return new RedirectResponse($this->generateUrl('getBundlesInfo'));
+    }
+
+    /**
+     * @Route("/details_perm_redirect", name="detailsPermRedirectAction")
+     *
+     * @return RedirectResponse
+     */
+    public function detailPermAction()
+    {
+        return $this->redirectToRoute('getBundlesInfo', [], Response::HTTP_MOVED_PERMANENTLY);
+    }
+
+    /**
+     * @Route("/forward_get_food", name="forwardGetFoodReportAction")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function forwardAction(Request $request)
+    {
+        if(null === $request->query->get('name')) {
+            throw $this->createNotFoundException('No name provided');
+        }
+        return $this->forward('TestApiBundle:NdbApi:getFoodReportByName');
     }
 }

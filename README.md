@@ -71,12 +71,14 @@ Controllers
       Check this behaviour using a functional test (using BrowserKit).
    
    !! If you need to pass a custom header through the request you need to put a header starting with HTTP_ if you want to access it through the  headers property of the Request object.
-   3. Add a cookie on a response and check it in the functional test.
+   3. Add a cookie on a response and check it in lthe functional test.
       Ctrl: $this->response->headers->addCookie(new Cookie('name', ''))
       Test: $client->getCookieJar()->get('name')
    4. Add a flash on the response in a controller action.
       CTRL: $this->addFlash or $this->container->get('session')->getFlashBag()->add('name');
-   5. Make a redirect and an internal redirect.
+   5. Make a temporary, a permanent redirect -  using different methods and an internal redirect (forward to another controller).
+      CTRL: $this->redirect($this->generateUrl('nameOfRoute')) - which does new RedirectResponse, by default redirect performs a 302 (temporary redirect).
+      For a permanent redirect , we need to put 302 as the status code parameter.
+      or $this->redirectToRoute('nameOfRoute', [], 302)
    6. Generate a 404 page.
-   7. Play with some internal controllers.
-   8. Check restrictions regarding the name of the controller.
+      Used createNotFoundException method from base Controller class.
